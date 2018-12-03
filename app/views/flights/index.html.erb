@@ -1,0 +1,11 @@
+<%= form_tag('/', method: 'get') do %>
+  <%= label_tag(:from_code, 'From:') %>
+  <%= select_tag(:from_code, options_for_select(@airport_options)) %>
+  <%= label_tag(:to_code, 'To:') %>
+  <%= select_tag(:to_code, options_for_select(@airport_options)) %>
+  <%= label_tag(:num_tickets, 'Passengers:') %>
+  <%= select_tag(:num_tickets, options_for_select(@passenger_options)) %>
+  <%= label_tag(:date, 'Flight Date') %>
+  <%= select_tag(:date, options_for_select(@departure_dates)) %>
+  <%= submit_tag 'Search Flight' %>
+<% end %>
