@@ -25,6 +25,14 @@ Flight.create!(from_airport: Airport.first,
                to_airport:   Airport.second,
                departure: '2018-12-23 08:30:00',
                duration:  '01:50:00')
+Flight.create!(from_airport: Airport.first,
+               to_airport:   Airport.second,
+               departure: '2018-12-23 12:00:00',
+               duration:  '01:50:00')
+Flight.create!(from_airport: Airport.first,
+               to_airport:   Airport.third,
+               departure: '2018-12-23 14:20:00',
+               duration:  '01:50:00')
 Flight.create!(from_airport: Airport.second,
                to_airport:   Airport.third,
                departure: '2019-3-15 17:45:00',

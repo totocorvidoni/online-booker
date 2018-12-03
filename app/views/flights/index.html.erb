@@ -1,11 +1,33 @@
-<%= form_tag('/', method: 'get') do %>
-  <%= label_tag(:from_code, 'From:') %>
-  <%= select_tag(:from_code, options_for_select(@airport_options)) %>
-  <%= label_tag(:to_code, 'To:') %>
-  <%= select_tag(:to_code, options_for_select(@airport_options)) %>
-  <%= label_tag(:num_tickets, 'Passengers:') %>
-  <%= select_tag(:num_tickets, options_for_select(@passenger_options)) %>
-  <%= label_tag(:date, 'Flight Date') %>
-  <%= select_tag(:date, options_for_select(@departure_dates)) %>
+<%= form_tag('/flights', method: 'get') do %>
+
+  <%= label_tag('flight_search[from_airport]', 'From:') %>
+  <%= select_tag('flight_search[from_airport]', options_for_select(@airport_options)) %>
+
+  <%= label_tag('flight_search[to_airport]', 'To:') %>
+  <%= select_tag('flight_search[to_airport]', options_for_select(@airport_options)) %>
+
+  <%= label_tag('flight_search[departure]', 'Flight Date') %>
+  <%= select_tag('flight_search[departure]', options_for_select(@departure_dates)) %>
+
+  <%= label_tag('flight_search[num_tickets]', 'Passengers:') %>
+  <%= select_tag('flight_search[num_tickets]', options_for_select(@passenger_options)) %>
+
   <%= submit_tag 'Search Flight' %>
+<% end %>
+
+<% unless @available_flights.nil? %>
+  <h2><%= "#{@from.name} - #{@to.name}" %></h2>
+  <%= form_tag('/bookings/new', method: 'get') do %>
+    <%= hidden_field_tag(:num_tickets, params[:flight_search]['num_tickets']) %>
+    <ul>
+      <% @available_flights.each do |flight| %>
+        <li>
+          <%= radio_button_tag(:flight, flight.id) %>
+          <%= label_tag("flight_#{flight.id}".to_s, flight.departure) %>
+        </li>  
+      <% end %>
+    </ul>
+
+    <%= submit_tag 'Pick Flight' %>
+  <% end %>
 <% end %>
