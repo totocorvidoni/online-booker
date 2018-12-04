@@ -15,4 +15,8 @@ class Flight < ApplicationRecord
   def departure_formatted
     departure.strftime("%d/%m/%Y")
   end
+  # Displays the name of departing - arriving airports
+  def route
+    "#{from_airport.name} - #{to_airport.name}"
+  end
 end

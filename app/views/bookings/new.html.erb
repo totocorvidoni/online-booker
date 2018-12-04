@@ -1,0 +1,21 @@
+<h1><%= @flight.route %></h1>
+<ul>
+  <li>Flight N&deg;: <%= @flight.id %></li>
+  <li>Departure: <%= @flight.departure %></li>
+</ul>
+
+<%= form_for @booking do |f| %>
+  <%= f.hidden_field(:flight_id) %>  
+  <div>
+    <% @passengers.each_with_index do |passenger, i| %>
+       <%= fields_for "passengers[#{i + 1}]", passenger do |p| %>
+        <h2>Passenger <%= i + 1 %></h2>
+        <%= p.label(:name) %>
+        <%= p.text_field(:name) %>
+        <%= p.label(:email)  %>
+        <%= p.email_field(:email) %>
+       <% end %>
+    <% end %> 
+  </div>
+  <%= f.submit %>
+<% end %>
